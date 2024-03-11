@@ -4,6 +4,7 @@ import {SCREENS} from '../constants/ScreenName';
 import LoginScreen from '../components/AuthenticationScreens/LoginScreen';
 import SignupScreen from '../components/AuthenticationScreens/SignupScreen';
 import ForgotPassword from '../components/AuthenticationScreens/ForgotPassword';
+import Onboarding from '../components/AuthenticationScreens/onbordings/Onboarding';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const AuthNavigation = () => {
         name={`${SCREENS.FORGETPASSWORD}`}
         component={ForgotPassword}
       />
+      <Stack.Screen name={`${SCREENS.ONBOARDING}`} component={Onboarding} />
     </Stack.Navigator>
   );
 };

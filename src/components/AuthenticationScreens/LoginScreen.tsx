@@ -6,31 +6,58 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {useAuth} from '../../contextApi/AuthProvider';
+import {useDispatch} from 'react-redux';
+import {loginAuth} from '../../redux/slice/auth.slice';
 
 interface LoginProps {
   navigation: any;
 }
 
 const LoginScreen: React.FC<LoginProps> = ({navigation}) => {
-  const [username, setUsername] = useState('');
+  const [useremail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const {login} = useAuth();
+  const dispatch = useDispatch();
+  // const {login} = useAuth();
 
   const handleLogin = () => {
-    login(username, password);
+    dispatch(loginAuth());
+  };
+
+  const handleGoogleLogin = () => {
+    dispatch(loginAuth());
+  };
+
+  const handleAppleLogin = () => {
+    dispatch(loginAuth());
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SIGN IN</Text>
+      <View>
+        <TouchableOpacity
+          style={styles.socialButton}
+          onPress={() => handleGoogleLogin()}>
+          <Icon name="logo-google" size={25} color="#fff" />
+          <Text style={styles.socialButtonText}>Login with Google</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.socialButton}
+          onPress={() => handleAppleLogin()}>
+          <Icon name="logo-apple" size={25} color="#fff" />
+          <Text style={styles.socialButtonText}>Login with Apple</Text>
+        </TouchableOpacity>
+      </View>
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="Input Email"
         placeholderTextColor="#808080"
-        onChangeText={text => setUsername(text)}
+        onChangeText={text => setUserEmail(text)}
       />
+
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -63,6 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#F5F5F5',
+    // backgroundColor: 'red',
+    gap: 10,
   },
   title: {
     fontSize: 30,
@@ -113,5 +142,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: '#3366CC',
+  },
+  socialButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#4285F4',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+
+  socialButtonText: {
+    color: '#fff',
+    marginLeft: 10,
+    fontSize: 16,
   },
 });

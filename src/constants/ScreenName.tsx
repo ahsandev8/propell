@@ -7,4 +7,5 @@ export const SCREENS = {
   ROOTPROFILE: 'RootProfile',
   BOTTOMROOT: 'BottomRoot',
   SETTING: 'Setting',
+  ONBOARDING: 'onboarding',
 };
